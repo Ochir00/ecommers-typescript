@@ -1,0 +1,21 @@
+Post   /users/register   // register new user
+Post   /users/login      // authenticate a user
+Get    /users/profile    // retrieve loggned-in user's profile.
+Put    /users/profile    // update logged-in user's profile
+
+Post   /products         // create a new product
+Get    /products         // get all products
+Get    /products/:id     // get a single product by ID 
+Put    /Products/:id     // update a product by ID
+Delete /Products/:id     // delete a product by ID
+
+// search endpoint
+
+Get    /search?query=keyword  // search for products by keyword
+
+// Shopping basket Endpoints
+
+Post   /basket                // add a product to the basket
+Get    /basket                // retrieve the current user's basket
+Put    /basket/:productId     // update quantity of product in the basket
+Delete /basket/:productId     // remove a product from the basket
