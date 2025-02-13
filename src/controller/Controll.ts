@@ -1,3 +1,4 @@
+import { productsdata } from "../database/product-data";
 import { users } from "../database/user-data";
 import { Request, RequestHandler, Response } from "express";
 
@@ -51,3 +52,29 @@ export const profileEdit: RequestHandler = (req: Request, res: Response) => {
   }
   res.send(user);
 };
+/*
+
+      PRODUCTS
+
+*/
+//title, price, comment, type, phone
+export const newProduct: RequestHandler = (req: Request, res: Response) => {
+  const newProduct = req.body;
+  const lastproduct = productsdata[productsdata.length - 1];
+  newProduct._id = lastproduct?._id ? Number(lastproduct._id) + 1 : 1;
+  newProduct._id.toString();
+  productsdata.push(newProduct)
+  res.send({progress:"newproduct check",id: newProduct._id, newProduct})
+}
+export const getproduct: RequestHandler = (req: Request, res: Response) => {
+  res.send(productsdata)
+}
+export const getproductbyid: RequestHandler = (req: Request, res: Response) => {
+  const { id } = req.params;
+  const product = productsdata.find((product) => product._id === id);
+  if(!product) {
+    res.send("tiim product alga")
+    return;
+  }
+  res.send(product);
+}
