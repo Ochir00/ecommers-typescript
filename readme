@@ -1,5 +1,5 @@
-Post   /users/register   // register new user
-Post   /users/login      // authenticate a user
+Post   /users/register   // register new user                         
+Post   /users/login      // authenticate a user                       
 Get    /users/profile    // retrieve loggned-in user's profile.
 Put    /users/profile    // update logged-in user's profile
 

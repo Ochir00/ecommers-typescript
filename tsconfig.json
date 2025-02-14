@@ -12,7 +12,7 @@
 /* 
     npm init -y
  
-    tsconfig.json
+    tsconfig.json  or  npm init
  
     npm i -D typescript
  

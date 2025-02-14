@@ -5,7 +5,6 @@ const app = express();
 app.use(bodyParser());
 // IMPORT
 
-import { users } from "./database/user-data";
 import { products, useRouter } from "./router/use-router";
 
 /*      ^ ^ ^ ^ ^       */

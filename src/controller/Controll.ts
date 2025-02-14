@@ -28,6 +28,7 @@ export const register: RequestHandler = (req: Request, res: Response) => {
   users.push(newUser);
   res.send(users);
 };
+
 export const loginstep: RequestHandler = (req: Request, res: Response) => {
   const { name, password, email } = req.body;
   const userName = users.find((user) => user.name === name);
@@ -38,11 +39,13 @@ export const loginstep: RequestHandler = (req: Request, res: Response) => {
   }
   res.send(userName);
 };
+
 export const profilelogin: RequestHandler = (req: Request, res: Response) => {
   const id = req.params.id;
   const user = users.find((user) => user._id == id);
   res.send(user);
 };
+
 export const profileEdit: RequestHandler = (req: Request, res: Response) => {
   const { id } = req.params;
   const { name } = req.body;
@@ -60,21 +63,52 @@ export const profileEdit: RequestHandler = (req: Request, res: Response) => {
 //title, price, comment, type, phone
 export const newProduct: RequestHandler = (req: Request, res: Response) => {
   const newProduct = req.body;
+  console.log(req.body);
   const lastproduct = productsdata[productsdata.length - 1];
   newProduct._id = lastproduct?._id ? Number(lastproduct._id) + 1 : 1;
-  newProduct._id.toString();
-  productsdata.push(newProduct)
-  res.send({progress:"newproduct check",id: newProduct._id, newProduct})
-}
+  newProduct._id = newProduct._id.toString();
+  productsdata.push(newProduct);
+  res.send({ progress: "newproduct check", id: newProduct._id, newProduct });
+};
 export const getproduct: RequestHandler = (req: Request, res: Response) => {
-  res.send(productsdata)
-}
+  res.send(productsdata);
+};
 export const getproductbyid: RequestHandler = (req: Request, res: Response) => {
   const { id } = req.params;
   const product = productsdata.find((product) => product._id === id);
-  if(!product) {
-    res.send("tiim product alga")
+  if (!product) {
+    res.send("tiim product alga");
     return;
   }
   res.send(product);
-}
+};
+export const updateProductID: RequestHandler = (
+  req: Request,
+  res: Response
+) => {
+  const { id } = req.params;
+  const { title, price, comment, type, phone } = req.body;
+  let update = productsdata.find((product) => product._id == id);
+  if (update) {
+    update.title = title;
+    update.price = price;
+    update.comment = comment;
+    update.type = type;
+    update.phone = phone;
+    res.send(update);
+  }
+  res.send("tiim idtai baraa oldsongu");
+};
+export const deleteProductID: RequestHandler = (
+  req: Request,
+  res: Response
+) => {
+  const { id } = req.params;
+  const deleted = productsdata.filter((product) => product._id !== id);
+  res.send(deleted);
+};
+/* 
+
+    product SEARCH
+
+*/
